@@ -1,13 +1,15 @@
 const express = require('express');
 const booksRouter = require('./routes/book');
-const bodyParser = require('body-parser');
 const securityRouter = require('./routes/security');
+const bodyParser = require('body-parser');
+const cors = require('cors');
+
 const security = require('./middleware/security');
 
 const app = express();
 
+app.use(cors());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(security.verifyToken);
 app.use(securityRouter);

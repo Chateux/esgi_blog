@@ -2,7 +2,11 @@ const verifyJWTToken = require('../config/auth').verifyToken;
 
 const verifyToken = (request, response, next) => {
 
-    if (request.path === '/token' && request.path === 'register') {
+    const authorizedPathes = [
+        '/token',
+        '/register'
+    ];
+    if(authorizedPathes.indexOf(request.path) !== -1){
         next();
     }
     else {
